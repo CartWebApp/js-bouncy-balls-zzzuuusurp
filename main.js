@@ -6,6 +6,7 @@ const ctx = canvas.getContext('2d');
 const width = canvas.width = window.innerWidth;
 const height = canvas.height = window.innerHeight;
 
+
 // function to generate random number
 
 function random(min, max) {
@@ -35,7 +36,7 @@ Ball.prototype.update = function() {
   if ((this.x - this.size) <= 0) {
     this.velX = -(this.velX);
   }
-  if ((this.y + this.size) >= 0) {
+  if ((this.y + this.size) >= height) {
     this.velY = (-this.velY);
   }
   if ((this.y - this.size) <= 0) {
@@ -72,6 +73,7 @@ while (balls.length < 1000) {
     random(-7,7),
     random(-7,7),
     'rgb(' + random(0,255) + "," + random(0,255) + ',' + random(0,255) + ')',
+    // 'url(\'images/bomb.png\')',
     size
   );
 
@@ -90,5 +92,6 @@ function loop() {
 
   requestAnimationFrame(loop);
 }
+
 
 loop();
