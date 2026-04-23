@@ -55,8 +55,9 @@ Ball.prototype.update = function() {
 
         if (distance < this.size + balls[j].size) {
           balls[j].color = this.color = 'rgb(' + random(0,255) +',' + random(0,255) + ',' + random(0,255) + ')';
-          balls[j].velX = -(balls[j].velX);
-          balls[j].velY = -(balls[j].velY);
+          balls.splice(j, 1)
+          this.velY = (this.velY+5)
+          this.velX = (this.velX+4)
         }
       }
     }
@@ -88,6 +89,24 @@ function loop() {
     balls[i].draw();
     balls[i].update();
     balls[i].collisionDetect();
+  }
+
+  if(balls.length < 5) {
+    while (balls.length < 200) {
+      let size = random(10,20);
+      let ball = new Ball(
+        //ball position should always be one ball width away from canvas
+        random(0 + size, width - size),
+        random(0 + size, height - size),
+        random(-7,7),
+        random(-7,7),
+        'rgb(' + random(0,255) + "," + random(0,255) + ',' + random(0,255) + ')',
+        // 'url(\'images/bomb.png\')',
+        size
+      );
+    
+      balls.push(ball);
+    }
   }
 
   requestAnimationFrame(loop);
