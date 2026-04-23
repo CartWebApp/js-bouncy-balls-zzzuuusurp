@@ -55,13 +55,24 @@ Ball.prototype.update = function() {
 
         if (distance < this.size + balls[j].size) {
           balls[j].color = this.color = 'rgb(' + random(0,255) +',' + random(0,255) + ',' + random(0,255) + ')';
-          balls.splice(j, 1)
-          this.velY = (this.velY+5)
-          this.velX = (this.velX+4)
+          if (balls[j].size <= this.size){
+            balls.splice(j, 1);
+            this.velY = (this.velY+5);
+            this.velX = (this.velX+4);
+          } 
+          else if (balls[j].size < this.size) {
+            balls.splice(balls.indexOf(this), 1);
+            balls[j].velY = (balls[j].velY+5);
+            balls[j].velX = (balls[j].velX+4);
+          }
+          //BIGGER ball eats the SMALLER ball
+          var audio = new Audio('images/epicexplosion.mp3');
+          audio.play();
+          //plays AUDIO
+          }
         }
       }
     }
-  }
 
 let balls = [];
 
